@@ -12,7 +12,6 @@
           sudo apt install python
       - name: run_linters
         run: |
-          source ml_project/venv/bin/activate
           pip install --upgrade pip
           pip install -r ./ml_project/venv/requirements.txt
           flake8 "./ml_project/src/*.py ./ml_project/test/*.py ./ml_project/config/*.py"
