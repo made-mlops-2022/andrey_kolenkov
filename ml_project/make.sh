@@ -23,7 +23,7 @@ python prepare.py #Скачивается и разделяетс файл с д
 cd ../test
 coverage run  test.py -b
 coverage report -m --omit=/usr/lib/*,/usr/local/lib/*
-coverage html -d ./report/coverage_report
+coverage html -d ./coverage_report
 
 deactivate
 

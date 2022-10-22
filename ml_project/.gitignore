@@ -1,3 +1,6 @@
 venv/*
 !venv/requirements.txt
 data/*
+#test
+#!test/test.py
+#src/__pycache__
