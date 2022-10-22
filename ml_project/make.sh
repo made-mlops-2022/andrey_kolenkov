@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+set -o pipefail
+
 ALL_FILES="./src/*.py ./test/*.py ./config/*.py"
 DATASET="https://www.dropbox.com/s/3mbvhnqm3pg8kf9/heart_cleveland_upload.csv?dl=0"
 
@@ -10,7 +12,7 @@ wget -O ./data/data.csv $DATASET
 pip install --upgrade pip
 pip install -r ./venv/requirements.txt
 
-black $ALL_FILES --line-length 79
+autopep8 $ALL_FILES --in-place --max-line-length 79
 
 flake8 $ALL_FILES
 pylint $ALL_FILES --disable=missing-module-docstring,missing-function-docstring,missing-class-docstring,invalid-name,too-many-instance-attributes

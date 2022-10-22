@@ -34,7 +34,8 @@ class Predict:
     def save_metrics(self):
         for i, model in enumerate(self.models):
             print(
-                f"For model {model} accuracy is {accuracy_score(self.predictions[i], self.test_Y)}"
+                f"""For model {model} accuracy is
+{accuracy_score(self.predictions[i], self.test_Y)}"""
             )
 
 

@@ -77,7 +77,7 @@ class Prepare:
 
             for key, value in gridsearch.best_params_.items():
                 ind = key.find("__")
-                key = key[ind + 2 :]
+                key = key[ind + 2:]
                 self.models[model][key] = value
         with open(CONFIG_PATH, "w", encoding="utf-8") as json_file:
             json.dump(self.data, json_file)
