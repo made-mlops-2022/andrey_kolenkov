@@ -15,4 +15,4 @@
           pip install --upgrade pip
           pip install -r ./ml_project/venv/requirements.txt
           flake8 ./ml_project/src/*.py ./ml_project/test/*.py ./ml_project/config/*.py
-          pylint ./ml_project/src/*.py ./ml_project/test/*.py ./ml_project/config/*.py
+          pylint ./ml_project/src/*.py ./ml_project/test/*.py ./ml_project/config/*.py --disable=missing-module-docstring,missing-function-docstring,missing-class-docstring,invalid-name,too-many-instance-attributes
