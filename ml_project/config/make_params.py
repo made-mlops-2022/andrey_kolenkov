@@ -32,7 +32,10 @@ def main():
         "target_feature": "condition",
         "model": {
             "KNN": {"n_neighbors": [2, 3, 4, 5, 6, 7]},
-            "LOGREG": {"C": [1.0, 1.5, 2.0], "max_iter": [1000]},
+            "LOGREG": {"C": [1.0, 1.5, 2.0],
+                       "max_iter": [1000]},
+            "SGDC": {"alpha": [0.0001, 0.001, 0.01],
+                     "l1_ratio": [0.15, 0.4, 0.7]},
         },
         "artifact_folder_path": "../artifacts",
         "predictions_folder_path": "../predictions",
