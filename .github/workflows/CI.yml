@@ -14,5 +14,5 @@
         run: |
           pip install --upgrade pip
           pip install -r ./ml_project/venv/requirements.txt
-          flake8 "./ml_project/src/*.py ./ml_project/test/*.py ./ml_project/config/*.py"
-          pylint "./ml_project/src/*.py ./ml_project/test/*.py ./ml_project/config/*.py"
+          flake8 ./ml_project/src/*.py ./ml_project/test/*.py ./ml_project/config/*.py
+          pylint ./ml_project/src/*.py ./ml_project/test/*.py ./ml_project/config/*.py
