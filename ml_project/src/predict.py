@@ -2,6 +2,9 @@ import json
 import pickle
 import numpy as np
 from sklearn.metrics import accuracy_score
+from sklearn.metrics import f1_score
+from sklearn.metrics import roc_auc_score
+from sklearn.metrics import recall_score
 
 from utils import CONFIG_PATH
 
@@ -18,6 +21,7 @@ class Predict:
         self.test_Y = np.loadtxt(self.test_Y_file_path)
         self.artifact_folder_path = self.data["artifact_folder_path"]
         self.predictions_folder_path = self.data["predictions_folder_path"]
+        self.metrix_path = self.data["metrics_path"]
         self.predictions = []
 
     def predict(self):
@@ -32,11 +36,20 @@ class Predict:
                 )
 
     def save_metrics(self):
+        metrics = {}
         for i, model in enumerate(self.models):
-            print(
-                f"""For model {model} accuracy is
-{accuracy_score(self.predictions[i], self.test_Y)}"""
-            )
+            metrics[model] = {}
+            metrics[model]["accuracy_score"] = accuracy_score(
+                self.test_Y, self.predictions[i])
+            metrics[model]["f1_score"] = f1_score(
+                self.test_Y, self.predictions[i])
+            metrics[model]["roc_auc_score"] = roc_auc_score(
+                self.test_Y, self.predictions[i])
+            metrics[model]["recall_score"] = recall_score(
+                self.test_Y, self.predictions[i])
+        print(metrics)
+        with open(self.metrix_path, "w", encoding="utf-8") as file:
+            json.dump(metrics, file)
 
 
 def main():

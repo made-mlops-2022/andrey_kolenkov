@@ -16,3 +16,8 @@
           pip install -r ./ml_project/venv/requirements.txt
           flake8 ./ml_project/src/*.py ./ml_project/test/*.py ./ml_project/config/*.py
           pylint ./ml_project/src/*.py ./ml_project/test/*.py ./ml_project/config/*.py --disable=missing-module-docstring,missing-function-docstring,missing-class-docstring,invalid-name,too-many-instance-attributes
+      - name: save_metrics
+        uses: actions/upload-artifact@v3
+        with:
+          name: metrics
+          path: ./ml_project/report/metrics.json

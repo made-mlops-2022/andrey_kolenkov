@@ -6,3 +6,4 @@ test/*
 src/__pycache__
 artifacts/*
 predictions/*
+report/*

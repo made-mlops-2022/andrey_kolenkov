@@ -10,7 +10,7 @@ def main():
         "test_X_file_path": "../data/test_X.csv",
         "test_Y_file_path": "../data/test_Y.csv",
         "output_model_path": "../models/ready_model.plk",
-        "metrics_path": "../report/metrix.json",
+        "metrics_path": "../report/metrics.json",
         "test_size": "0.25",
         "cathegory_features": [
             "sex",
