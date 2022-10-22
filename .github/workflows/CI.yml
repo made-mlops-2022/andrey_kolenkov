@@ -1,0 +1,19 @@
+ name: CI
+ on: [push, pull_request]
+ jobs:
+  MainCI:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: install_system
+        run: |
+          sudo apt update
+          sudo apt install python
+      - name: run_linters
+        run: |
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install -r ./venv/requirements.txt
+          flake8 "./src/*.py ./test/*.py ./config/*.py"
+          pylint "./src/*.py ./test/*.py ./config/*.py"

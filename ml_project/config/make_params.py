@@ -34,6 +34,8 @@ def main():
             "KNN": {"n_neighbors": [2, 3, 4, 5, 6, 7]},
             "LOGREG": {"C": [1.0, 1.5, 2.0], "max_iter": [1000]},
         },
+        "artifact_folder_path": "../artifacts",
+        "predictions_folder_path": "../predictions",
     }
 
     with open("parameters.json", "w", encoding="utf-8") as file:

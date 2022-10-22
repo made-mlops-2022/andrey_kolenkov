@@ -1,6 +1,8 @@
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import LogisticRegression
 
+CONFIG_PATH = "../config/parameters.json"
+
 
 def select_model(model_name: str):
     if model_name == "KNN":

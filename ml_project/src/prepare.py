@@ -9,10 +9,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.impute import KNNImputer
 from sklearn.model_selection import GridSearchCV
 
-from utils import select_model
-
-
-CONFIG_PATH = "../config/parameters.json"
+from utils import select_model, CONFIG_PATH
 
 
 class Prepare:
