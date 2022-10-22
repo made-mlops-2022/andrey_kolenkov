@@ -15,7 +15,7 @@ pip install -r ./venv/requirements.txt
 autopep8 $ALL_FILES --in-place --max-line-length 79
 
 flake8 $ALL_FILES
-pylint $ALL_FILES --disable=missing-module-docstring,missing-function-docstring,missing-class-docstring,invalid-name,too-many-instance-attributes
+pylint $ALL_FILES --disable=missing-module-docstring,missing-function-docstring,missing-class-docstring,invalid-name,too-many-instance-attributes,logging-fstring-interpolation,wrong-import-order
 
 cd ./config
 python3 make_params.py #Создается первоначальный конфиг со списком параметров, из которых хотим найти лучшие

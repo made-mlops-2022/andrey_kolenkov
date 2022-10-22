@@ -1,19 +1,23 @@
-import json
-import pandas as pd
-import numpy as np
-from sklearn.pipeline import Pipeline
-from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.model_selection import train_test_split
-from sklearn.impute import KNNImputer
-from sklearn.model_selection import GridSearchCV
-
 from utils import select_model, CONFIG_PATH
+from sklearn.model_selection import GridSearchCV
+from sklearn.impute import KNNImputer
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import StandardScaler
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+import numpy as np
+import pandas as pd
+import json
+import logging
+logging.basicConfig(filename="../report/log.txt",
+                    encoding='utf-8', format="%(asctime)s %(message)s",
+                    datefmt="%m/%d/%Y %I:%M:%S %p", level=logging.DEBUG)
 
 
 class Prepare:
     def __init__(self):
+        logging.debug("Reading config")
         with open(CONFIG_PATH, "r", encoding="utf-8") as json_file:
             self.data = json.load(json_file)
         self.random_state = int(self.data["random_state"])
@@ -44,8 +48,10 @@ class Prepare:
                 ),
             ]
         )
+        logging.debug("Config is read")
 
     def prepare_features(self):
+        logging.debug("Start preparing features")
         np_X = self.ct.fit_transform(self.X)
         np_Y = self.Y.to_numpy()
         X_train, X_test, Y_train, Y_test = train_test_split(
@@ -58,8 +64,10 @@ class Prepare:
         np.savetxt(self.test_X_file_path, X_test)
         np.savetxt(self.train_Y_file_path, Y_train)
         np.savetxt(self.test_Y_file_path, Y_test)
+        logging.debug("New feature files are saved")
 
     def update_parameters(self):
+        logging.debug("Start parameter search")
         for model in self.models:
             ml_model = select_model(model)
 
@@ -81,6 +89,7 @@ class Prepare:
                 self.models[model][key] = value
         with open(CONFIG_PATH, "w", encoding="utf-8") as json_file:
             json.dump(self.data, json_file)
+        logging.debug("Best parameters are written in config")
 
 
 def main():
