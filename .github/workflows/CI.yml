@@ -12,10 +12,8 @@
           sudo apt install python
       - name: run_linters
         run: |
-          pip install --upgrade pip
-          pip install -r ./ml_project/venv/requirements.txt
-          flake8 ./ml_project/src/*.py ./ml_project/test/*.py ./ml_project/config/*.py
-          pylint ./ml_project/src/*.py ./ml_project/test/*.py ./ml_project/config/*.py --disable=missing-module-docstring,missing-function-docstring,missing-class-docstring,invalid-name,too-many-instance-attributes
+          cd ml_project
+          bash make.sh
       - name: save_metrics
         uses: actions/upload-artifact@v3
         with:
