@@ -18,11 +18,11 @@ flake8 $ALL_FILES
 pylint $ALL_FILES --disable=missing-module-docstring,missing-function-docstring,missing-class-docstring,invalid-name,too-many-instance-attributes
 
 cd ./config
-python make_params.py #Создается первоначальный конфиг со списком параметров, из которых хотим найти лучшие
+python3 make_params.py #Создается первоначальный конфиг со списком параметров, из которых хотим найти лучшие
 cd ../src
-python prepare.py #Скачивается и разделяетс файл с данными. В конфиге каждый список параметров заменяется на лучший параметр
-python train.py #Обучается и сохраняется как артифакт каждая модель из конфига
-python predict.py #Сохраняются предсказания для тестовой выборки и выводится и сохраняется accuracy_score
+python3 prepare.py #Скачивается и разделяетс файл с данными. В конфиге каждый список параметров заменяется на лучший параметр
+python3 train.py #Обучается и сохраняется как артифакт каждая модель из конфига
+python3 predict.py #Сохраняются предсказания для тестовой выборки и выводится и сохраняется accuracy_score
 
 cd ../test
 coverage run  test.py -b
