@@ -14,6 +14,7 @@
           sudo apt-get install python3-venv
       - name: run_all
         run: |
+          pwd
           cd ml_project
           bash make.sh config1.json
       - name: save_metrics
