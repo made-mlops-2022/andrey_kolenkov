@@ -8,7 +8,7 @@
     "output_model_path": "../models/ready_model.plk",
     "metrics_path": "../report/metrics.json",
     "log_path": "../report/log.txt",
-    "test_size": "0.25",
+    "test_size": "0.40",
     "cathegory_features": [
         "sex",
         "cp",
