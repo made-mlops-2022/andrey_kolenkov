@@ -20,6 +20,10 @@ pylint $ALL_FILES --disable=missing-module-docstring,missing-function-docstring,
 
 cd ./config
 #python3 make_params.py $CONFIG_PATH #Создается первоначальный конфиг со списком параметров, из которых хотим найти лучшие, не используется
+
+cd ..
+touch ./report/log.txt
+
 cd ../src
 python3 prepare.py $CONFIG_PATH #Скачивается и разделяетс файл с данными. В конфиге каждый список параметров заменяется на лучший параметр
 python3 train.py $CONFIG_PATH #Обучается и сохраняется как артифакт каждая модель из конфига

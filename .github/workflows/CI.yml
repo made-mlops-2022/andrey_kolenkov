@@ -12,7 +12,7 @@
           sudo apt install python3
           sudo apt-get install libpython3-dev
           sudo apt-get install python3-venv
-      - name: run_linters
+      - name: run_all
         run: |
           cd ml_project
           bash make.sh config1.json
@@ -26,3 +26,8 @@
         with:
           name: metrics
           path: ./ml_project/report/coverage_report
+      - name: save_logs
+        uses: actions/upload-artifact@v3
+        with:
+          name: metrics
+          path: ./ml_project/report/log.txt
