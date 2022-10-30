@@ -5,8 +5,12 @@ set -o pipefail
 ALL_FILES="./src/*.py ./test/*.py ./config/*.py"
 DATASET="https://www.dropbox.com/s/3mbvhnqm3pg8kf9/heart_cleveland_upload.csv?dl=0"
 CONFIG_PATH="../config/"$1
+ON_PROD=$2
 
-source venv/bin/activate
+if [ "$ON_PROD" == "prod" ]
+then
+  source venv/bin/activate
+fi
 
 wget -O ./data/data.csv $DATASET
 
@@ -34,5 +38,10 @@ coverage run test.py
 coverage report -m --omit=/usr/lib/*,/usr/local/lib/*
 coverage html -d ../report/coverage_report
 
-deactivate
+
+if [ "$ON_PROD" == "prod" ]
+then
+  deactivate
+fi
+
 
