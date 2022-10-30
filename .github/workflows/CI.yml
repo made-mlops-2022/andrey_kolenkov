@@ -15,9 +15,14 @@
       - name: run_linters
         run: |
           cd ml_project
-          bash make.sh
+          bash make.sh config1.json
       - name: save_metrics
         uses: actions/upload-artifact@v3
         with:
           name: metrics
           path: ./ml_project/report/metrics.json
+      - name: save_coverage_report
+        uses: actions/upload-artifact@v3
+        with:
+          name: metrics
+          path: ./ml_project/report/coverage_report

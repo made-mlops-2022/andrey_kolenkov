@@ -6,8 +6,6 @@ logging.basicConfig(filename="../report/log.txt",
                     encoding='utf-8', format="%(asctime)s %(message)s",
                     datefmt="%m/%d/%Y %I:%M:%S %p", level=logging.DEBUG)
 
-CONFIG_PATH = "../config/parameters.json"
-
 
 def select_model(model_name: str):
     logging.debug("Fabric function is called")

@@ -1,9 +1,11 @@
-from utils import select_model, CONFIG_PATH
-from sklearn.pipeline import Pipeline
-import numpy as np
-import pickle
-import json
 import logging
+from config_data import Config
+import pickle
+import numpy as np
+from sklearn.pipeline import Pipeline
+from utils import select_model
+import sys
+
 logging.basicConfig(filename="../report/log.txt",
                     encoding='utf-8', format="%(asctime)s %(message)s",
                     datefmt="%m/%d/%Y %I:%M:%S %p", level=logging.DEBUG)
@@ -11,26 +13,23 @@ logging.basicConfig(filename="../report/log.txt",
 
 class Train:
     def __init__(self):
+        CONFIG_PATH = sys.argv[1]
         logging.debug("Reading config")
         with open(CONFIG_PATH, "r", encoding="utf-8") as json_file:
-            self.data = json.load(json_file)
-        self.models = self.data["model"]
-        self.random_state = int(self.data["random_state"])
-        self.train_X_file_path = self.data["train_X_file_path"]
-        self.train_Y_file_path = self.data["train_Y_file_path"]
-        self.train_X = np.loadtxt(self.train_X_file_path)
-        self.train_Y = np.loadtxt(self.train_Y_file_path)
-        self.artifact_folder_path = self.data["artifact_folder_path"]
+            config_str = json_file.read()
+            self.config = Config(config_str)
+        self.train_X = np.loadtxt(self.config.train_X_file_path)
+        self.train_Y = np.loadtxt(self.config.train_Y_file_path)
         self.trained_models = []
         logging.debug("Config is read")
 
     def train(self):
-        for model in self.models:
+        for model in self.config.model:
             logging.debug(f"Training model {model}")
             ml_model = select_model(model)
 
             pipeline = Pipeline(
-                steps=[("model", ml_model(**self.models[model]))]
+                steps=[("model", ml_model(**self.config.model[model]))]
             )
 
             pipeline.fit(self.train_X, self.train_Y)
@@ -40,8 +39,9 @@ class Train:
 
     def save_models(self):
         logging.debug("Saving trained models")
-        for i, model in enumerate(self.models):
-            with open(f"{self.artifact_folder_path}/{model}", "wb") as file:
+        for i, model in enumerate(self.config.model):
+            with open(f"{self.config.artifact_folder_path}/{model}",
+                      "wb") as file:
                 pickle.dump(self.trained_models[i], file)
         logging.debug("Trained models are saved")
 

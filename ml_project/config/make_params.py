@@ -1,5 +1,7 @@
-import json
 import logging
+import json
+import sys
+CONFIG_PATH = sys.argv[1]
 logging.basicConfig(filename="../report/log.txt",
                     encoding='utf-8', format="%(asctime)s %(message)s",
                     datefmt="%m/%d/%Y %I:%M:%S %p", level=logging.DEBUG)
@@ -37,18 +39,18 @@ def main():
         ],
         "target_feature": "condition",
         "model": {
-            "KNN": {"n_neighbors": [2, 3, 4, 5, 6, 7]},
-            "LOGREG": {"C": [1.0, 1.5, 2.0],
-                       "max_iter": [1000]},
-            "SGDC": {"alpha": [0.0001, 0.001, 0.01],
-                     "l1_ratio": [0.15, 0.4, 0.7]},
+            "KNN": {"n_neighbors": 3},
+            "LOGREG": {"C": 1.0,
+                       "max_iter": 1000},
+            "SGDC": {"alpha": 0.001,
+                     "l1_ratio": 0.4},
         },
         "artifact_folder_path": "../artifacts",
         "predictions_folder_path": "../predictions",
     }
     logging.debug("Writing basic config")
-    with open("parameters.json", "w", encoding="utf-8") as file:
-        json.dump(data, file)
+    with open(CONFIG_PATH, "w", encoding="utf-8") as file:
+        json.dump(data, file, indent=4)
     logging.debug("Basic config is created")
 
 
