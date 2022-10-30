@@ -24,7 +24,7 @@ cd ./config
 cd ..
 touch ./report/log.txt
 
-cd ../src
+cd ./src
 python3 prepare.py $CONFIG_PATH #Скачивается и разделяетс файл с данными. В конфиге каждый список параметров заменяется на лучший параметр
 python3 train.py $CONFIG_PATH #Обучается и сохраняется как артифакт каждая модель из конфига
 python3 predict.py $CONFIG_PATH #Сохраняются предсказания для тестовой выборки и выводится и сохраняется accuracy_score
