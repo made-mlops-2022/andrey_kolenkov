@@ -9,7 +9,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.impute import KNNImputer
 import sys
 logging.basicConfig(filename="../report/log.txt",
-                    encoding='utf-8', format="%(asctime)s %(message)s",
+                    encoding="UTF-8", format="%(asctime)s %(message)s",
                     datefmt="%m/%d/%Y %I:%M:%S %p", level=logging.DEBUG)
 
 

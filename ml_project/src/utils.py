@@ -3,7 +3,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
 import logging
 logging.basicConfig(filename="../report/log.txt",
-                    encoding='utf-8', format="%(asctime)s %(message)s",
+                    encoding="UTF-8", format="%(asctime)s %(message)s",
                     datefmt="%m/%d/%Y %I:%M:%S %p", level=logging.DEBUG)
 
 
