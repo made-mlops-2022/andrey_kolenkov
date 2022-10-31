@@ -8,8 +8,7 @@ from sklearn.metrics import roc_auc_score
 from sklearn.metrics import recall_score
 import json
 import sys
-logging.basicConfig(filename="../report/log.txt",
-                    encoding="UTF-8", format="%(asctime)s %(message)s",
+logging.basicConfig(filename="../report/log.txt", format="%(asctime)s %(message)s",
                     datefmt="%m/%d/%Y %I:%M:%S %p", level=logging.DEBUG)
 
 
