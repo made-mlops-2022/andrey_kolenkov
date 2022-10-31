@@ -4,6 +4,8 @@ test/*
 !test/test.py
 src/__pycache__
 artifacts/*
+!artifacts/.gitemptys
 predictions/*
+!predictions/.gitempty
 report/*
 !report/.gitempty
