@@ -9,9 +9,10 @@ from sklearn.impute import KNNImputer
 from config_data import Config
 import sys
 from fastapi import FastAPI
-FASTAPI_APP = FastAPI()
-CONFIG_PATH = os.getenv("CONFIG_PATH")
 
+FASTAPI_APP = FastAPI()
+
+CONFIG_PATH = os.getenv("CONFIG_PATH") if os.getenv("CONFIG_PATH") else "/home/adefe/prog/Python/andrey_kolenkov/online_inference/config/config.json"
 
 MODELS = {}
 CONFIG = Config(CONFIG_PATH)
@@ -60,7 +61,7 @@ def predict(data):
     return PredictResultModel(result=result)
 
 
-@FASTAPI.get("/health", response_model=StatusModel)
+@FASTAPI_APP.get("/health", response_model=StatusModel)
 def health():
     status = True
     if len(MODELS) != 2:

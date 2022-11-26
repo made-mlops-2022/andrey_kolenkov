@@ -8,3 +8,4 @@ flake8
 fastapi
 pydantic
 uvicorn
+httpx
