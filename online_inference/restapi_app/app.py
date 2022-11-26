@@ -32,7 +32,8 @@ def prepare_models():
 @FASTAPI_APP.get("/predict", response_model=PredictResultModel)
 def predict(data):
     features = pd.DataFrame(data.features, columns=data.feature_names)
-
+    with open("file.txt", "w") as file:
+        file.write(data)
     if data.model_type == "KNN":
         model = MODELS["KNN"]
     if data.model_type == "LOGREG":

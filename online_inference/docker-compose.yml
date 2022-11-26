@@ -6,6 +6,6 @@ services:
             context: .
             dockerfile: Dockerfile
         environment:
-        - CONFIG_PATH=/home/config/config.json
-        expose:
-        - 14565
+          - CONFIG_PATH=/home/config/config.json
+        ports:
+          - 14565:14565

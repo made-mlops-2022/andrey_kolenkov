@@ -1,2 +1,3 @@
 venv/*
 !venv/requirements.txt
+restapi_app/__pycache__

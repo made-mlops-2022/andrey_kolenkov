@@ -1,7 +1,7 @@
 {
     "random_state": "14565",
-    "knn_model_path": "../models/KNN",
-    "logreg_model_path": "../models/LOGREG",
+    "knn_model_path": "/home/models/KNN",
+    "logreg_model_path": "/home/models/LOGREG",
     "cathegory_features": [
         "sex",
         "cp",
