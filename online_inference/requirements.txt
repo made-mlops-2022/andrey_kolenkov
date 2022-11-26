@@ -1,0 +1,10 @@
+numpy
+autopep8
+pylint
+coverage
+scikit-learn
+pandas
+flake8
+fastapi
+pydantic
+uvicorn

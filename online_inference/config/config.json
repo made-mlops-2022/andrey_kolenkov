@@ -1,0 +1,23 @@
+{
+    "random_state": "14565",
+    "knn_model_path": "../models/KNN",
+    "logreg_model_path": "../models/LOGREG",
+    "cathegory_features": [
+        "sex",
+        "cp",
+        "restecg",
+        "exang",
+        "slope",
+        "thal"
+    ],
+    "number_features": [
+        "age",
+        "trestbps",
+        "chol",
+        "fbs",
+        "thalach",
+        "oldpeak",
+        "ca"
+    ],
+    "target_feature": "condition"
+}
