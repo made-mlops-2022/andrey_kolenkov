@@ -55,9 +55,9 @@ def predict(data : FeaturesModel):
     )
 
     X = ct.fit_transform(features)
-
     result = model.predict(X)
-    return PredictResultModel(result=result)
+    result_list = list(result)
+    return PredictResultModel(result=result_list)
 
 
 @FASTAPI_APP.get("/health", response_model=StatusModel)

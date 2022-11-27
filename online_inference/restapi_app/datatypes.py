@@ -12,4 +12,4 @@ class StatusModel(BaseModel):
 
 
 class PredictResultModel(BaseModel):
-    result: conlist(item_type=int)
+    result: list

@@ -1,4 +1,5 @@
 import unittest
+import pandas as pd
 from unittest.mock import patch
 from fastapi.testclient import TestClient
 import sys
@@ -10,17 +11,18 @@ class TestFastAPIApp(unittest.TestCase):
 
     def test_predict(self):
         class model_mock:
-            def predict(self):
-                return 1
+            def predict(x):
+                return [1 for _ in x]
         with patch.dict("app.MODELS", {"LOGREG": model_mock}):
+            data = pd.read_csv("some_data.csv")
+            data = data.drop("condition", axis=1)
+            feature_names = list(data.columns)
+            features = data.values.tolist()
+            json_dict = {"feature_names" : feature_names, "features" : features, "model_type" : "LOGREG"}
             client = TestClient(FASTAPI_APP)
-            features = [[69.0, 1.0, 0.0, 160.0, 234.0, 1.0, 2.0, 131.0, 0.0, 0.1, 1.0, 1.0, 0.0], [69.0, 0.0, 0.0, 140.0, 239.0, 0.0,
-                                                                                                   0.0, 151.0, 0.0, 1.8, 0.0, 2.0, 0.0], [66.0, 0.0, 0.0, 150.0, 226.0, 0.0, 0.0, 114.0, 0.0, 2.6, 2.0, 0.0, 0.0]]
-            feature_names = ['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs',
-                             'restecg', 'thalach', 'exang', 'oldpeak', 'slope', 'ca', 'thal']
             response = client.get(
                 "/predict",
-                params={"feature_names": feature_names, "features": features,  "model_type": "LOGREG"})
+                json=json_dict)
             self.assertEqual(response.status_code, 200)
 
     def test_health(self):
