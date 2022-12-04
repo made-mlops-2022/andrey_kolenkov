@@ -1,11 +1,10 @@
 from airflow import DAG
 from airflow.providers.docker.operators.docker import DockerOperator
-from docker.types import Mount
 from datetime import datetime
+from docker.types import Mount
 from airflow.utils.email import send_email
-from common import email_alert, default_args
+from common import email_alert, default_args, get_mount
 
-mount = Mount(source="../data", target="/data", type="bind")
 
 with DAG(
     "data_generator",
@@ -19,6 +18,6 @@ with DAG(
         network_mode="bridge",
         auto_remove=True,
         task_id="docker-airflow-data-generator",
-        mounts=[mount])
+        mounts=[get_mount()])
 
     data_generator

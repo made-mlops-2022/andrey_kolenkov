@@ -4,9 +4,7 @@ from airflow.sensors.python import PythonSensor
 from docker.types import Mount
 from airflow.utils.email import send_email
 import os
-from common import email_alert, default_args
-
-mount = Mount(source="../data", target="/data", type="bind")
+from common import email_alert, default_args, get_mount
 
 with DAG(
     "predictor",
@@ -30,7 +28,7 @@ with DAG(
         task_id="docker-airflow-preprocessor",
         do_xcom_push=False,
         auto_remove=True,
-        mounts=[mount]
+        mounts=[get_mount()]
     )
 
     predictor = DockerOperator(
@@ -40,7 +38,7 @@ with DAG(
         task_id="docker-airflow-predictor",
         do_xcom_push=False,
         auto_remove=True,
-        mounts=[mount]
+        mounts=[get_mount()]
     )
 
     wait_data >> preprocessor >> predictor

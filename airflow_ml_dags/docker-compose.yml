@@ -4,9 +4,11 @@ services:
   mariadb:
     image: mariadb:jammy
     env_file:
-      - ./.mariadb_environment
+      - .mariadb_environment
     expose:
       - 3306
+    volumes:
+      - ./mariadb:/var/lib/mysql:z
 
   init:
     build:
@@ -14,8 +16,9 @@ services:
     image: airflow-docker
     depends_on:
       - mariadb
+    user: root
     env_file:
-      - ./.airflow_environment
+      - .airflow_environment
     entrypoint: /bin/bash
     command: -c "airflow db init && airflow users create --username admin --password admin --firstname Andrey --lastname Kolenkov --role Admin --email avoknelok@mail.ru"
 
@@ -26,13 +29,14 @@ services:
     depends_on:
       - mariadb
     env_file:
-      - ./.airflow_environment
+      - .airflow_environment
     command: webserver
     restart: always
+    user: root
     ports:
       - 8080:8080
     volumes:
-      - ./logs:/opt/airflow/logs
+      - ./logs:/opt/airflow/logs:z
 
   scheduler:
     build:
@@ -41,43 +45,52 @@ services:
     depends_on:
       - mariadb
     env_file:
-      - ./.airflow_environment
-    command: webserver
+      - .airflow_environment
+    command: scheduler
     restart: always
+    user: root
     volumes:
-      - ./dags/:/opt/airflow/dags/
-      - ./data/:/opt/airflow/data/
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./logs:/opt/airflow/logs
+      - ./dags/:/opt/airflow/dags:z
+      - ./data/:/opt/airflow/data:z
+      - ./logs:/opt/airflow/logs:z
+      - /var/run/docker.sock:/var/run/docker.sock:z
 
   data_generator:
     build:
       context: ./images/airflow-data-generator
     image: airflow-data-generator
+    user: root
 
   preprocessor:
     build:
       context: ./images/airflow-preprocessor
     image: airflow-preprocessor
+    user: root
 
   data_splitter:
     build:
       context: ./images/airflow-data-splitter
     image: airflow-data-splitter
+    user: root
 
   trainer:
     build:
       context: ./images/airflow-trainer
     image: airflow-trainer
+    user: root
 
   validator:
     build:
       context: ./images/airflow-validator
     image: airflow-validator
+    user: root
 
   predictor:
     build:
       context: ./images/airflow-predictor
     image: airflow-predictor
+    user: root
 
 
+volumes:
+  logs:
