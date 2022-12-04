@@ -25,7 +25,7 @@ with DAG(
 
     preprocessor = DockerOperator(
         image="airflow-preprocessor",
-        command="--raw-data-dir /data/raw{{ ds }} --output-dir /data/ready/{{ ds }}",
+        command="--raw-data-dir /data/raw/{{ ds }} --output-dir /data/ready/{{ ds }}",
         network_mode="bridge",
         task_id="docker-airflow-preprocessor",
         do_xcom_push=False,
@@ -35,7 +35,7 @@ with DAG(
 
     data_splitter = DockerOperator(
         image="airflow-data-splitter",
-        command="--data-dir  /data/ready/{{ ds }} --train-dir /data/train/ --val-dir /data/val/{{ ds }}",
+        command="--data-dir  /data/ready/{{ ds }} --train-dir /data/train/{{ ds }} --val-dir /data/val/{{ ds }}",
         network_mode="bridge",
         task_id="docker-airflow-data-splitter",
         do_xcom_push=False,
@@ -45,7 +45,7 @@ with DAG(
 
     trainer = DockerOperator(
         image="airflow-trainer",
-        command="--data-dir  /data/train/{{ ds }} --result-dir /data/models/",
+        command="--data-dir  /data/train/{{ ds }} --result-dir /data/models/{{ ds }}",
         network_mode="bridge",
         task_id="docker-airflow-trainer",
         do_xcom_push=False,
