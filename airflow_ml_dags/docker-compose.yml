@@ -1,37 +1,32 @@
-version: '3.8'
+version: "3.8"
 
 services:
   mariadb:
     image: mariadb:jammy
     env_file:
-      - ./mariadb_environment
+      - ./.mariadb_environment
     expose:
       - 3306
-
 
   init:
     build:
       context: ./images/airflow-docker
-      args:
-        AIRFLOW_BASE_IMAGE: apache/airflow:2.5.0-python3.10
     image: airflow-docker
     depends_on:
       - mariadb
     env_file:
-      - ./airflow_environment
+      - ./.airflow_environment
     entrypoint: /bin/bash
-    command: -c 'airflow db init && airflow users create --username admin --password admin --firstname Andrey --lastname Kolenkov --role Admin --email avoknelok@mail.ru'
+    command: -c "airflow db init && airflow users create --username admin --password admin --firstname Andrey --lastname Kolenkov --role Admin --email avoknelok@mail.ru"
 
   webserver:
     build:
       context: ./images/airflow-docker
-      args:
-        AIRFLOW_BASE_IMAGE: apache/airflow:2.5.0-python3.10
     image: airflow-docker
     depends_on:
       - mariadb
     env_file:
-      - ./airflow_environment
+      - ./.airflow_environment
     command: webserver
     restart: always
     ports:
@@ -42,13 +37,11 @@ services:
   scheduler:
     build:
       context: ./images/airflow-docker
-      args:
-        AIRFLOW_BASE_IMAGE: apache/airflow:2.5.0-python3.10
     image: airflow-docker
     depends_on:
       - mariadb
     env_file:
-      - ./airflow_environment
+      - ./.airflow_environment
     command: webserver
     restart: always
     volumes:
@@ -77,12 +70,14 @@ services:
       context: ./images/airflow-trainer
     image: airflow-trainer
 
+  validator:
+    build:
+      context: ./images/airflow-validator
+    image: airflow-validator
+
   predictor:
     build:
       context: ./images/airflow-predictor
     image: airflow-predictor
 
-  validator:
-    build:
-      context: ./images/airflow-validator
-    image: airflow-validator
+

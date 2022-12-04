@@ -1,2 +1,4 @@
 data/*
 data/.gitempty
+!.mariadb_environment
+!.airflow_environment
