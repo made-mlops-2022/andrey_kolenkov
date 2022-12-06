@@ -1,6 +1,7 @@
 version: "3.8"
 
 services:
+
   mariadb:
     image: mariadb:jammy
     env_file:
@@ -16,7 +17,6 @@ services:
     image: airflow-docker
     depends_on:
       - mariadb
-    user: root
     env_file:
       - .airflow_environment
     entrypoint: /bin/bash
@@ -32,7 +32,6 @@ services:
       - .airflow_environment
     command: webserver
     restart: always
-    user: root
     ports:
       - 8080:8080
     volumes:
@@ -48,7 +47,6 @@ services:
       - .airflow_environment
     command: scheduler
     restart: always
-    user: root
     volumes:
       - ./dags/:/opt/airflow/dags:z
       - ./data/:/opt/airflow/data:z
@@ -59,38 +57,28 @@ services:
     build:
       context: ./images/airflow-data-generator
     image: airflow-data-generator
-    user: root
 
   preprocessor:
     build:
       context: ./images/airflow-preprocessor
     image: airflow-preprocessor
-    user: root
 
   data_splitter:
     build:
       context: ./images/airflow-data-splitter
     image: airflow-data-splitter
-    user: root
 
   trainer:
     build:
       context: ./images/airflow-trainer
     image: airflow-trainer
-    user: root
 
   validator:
     build:
       context: ./images/airflow-validator
     image: airflow-validator
-    user: root
 
   predictor:
     build:
       context: ./images/airflow-predictor
     image: airflow-predictor
-    user: root
-
-
-volumes:
-  logs:

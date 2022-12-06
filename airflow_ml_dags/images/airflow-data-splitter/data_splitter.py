@@ -15,8 +15,8 @@ def split(data_dir, train_dir, val_dir):
 
     df = pd.read_csv(f"{data_dir}/data.csv")
 
-    Y = df["condition"]
-    X = df.drop("condition", axis=1)
+    Y = df.iloc[:,-1:]
+    X = df.iloc[:,:-1]
 
     X_train, X_test, y_train, y_test = train_test_split(
         X, Y, test_size=0.25, random_state=14565)

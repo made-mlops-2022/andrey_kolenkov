@@ -53,7 +53,7 @@ with DAG(
 
     validator = DockerOperator(
         image="airflow-validator",
-        command="--data_dir  /data/val/{{ ds }} --model-dir /data/models --result-dir /data/metrics/{{ ds }}",
+        command="--data-dir /data/val/{{ ds }} --model-dir /data/models/{{ ds }} --result-dir /data/metrics/{{ ds }}",
         network_mode="bridge",
         task_id="docker-airflow-validator",
         do_xcom_push=False,

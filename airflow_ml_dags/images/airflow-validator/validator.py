@@ -14,7 +14,7 @@ from sklearn.metrics import accuracy_score
 def validate(data_dir, model_dir, result_dir):
     os.makedirs(result_dir, exist_ok=True)
     X = pd.read_csv(f"{data_dir}/X_test.csv")
-    Y = pd.read_csv(f"{data_dir}/y_test.csv")
+    y_true = pd.read_csv(f"{data_dir}/y_test.csv")
 
     with open(f"{model_dir}/model", 'rb') as file:
         model = pickle.load(file)
@@ -23,8 +23,8 @@ def validate(data_dir, model_dir, result_dir):
 
     accuracy = accuracy_score(y_true, y_pred)
 
-    with open(f"{result_dir}/accuracy.txt", w) as file:
-        file.write("Accuracy: {accuracy}")
+    with open(f"{result_dir}/accuracy.txt", "w") as file:
+        file.write(f"Accuracy: {accuracy}")
 
 if __name__ == "__main__":
     validate()

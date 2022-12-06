@@ -20,8 +20,8 @@ def predict(data_dir, model_dir, result_dir):
 
     y_pred = model.predict(X)
 
-    df = pd.Dataframe(y_pred)
-    y.to_csv(f"{result_dir}/result.csv")
+    df = pd.DataFrame(y_pred)
+    df.to_csv(f"{result_dir}/result.csv")
 
 if __name__ == "__main__":
     predict()

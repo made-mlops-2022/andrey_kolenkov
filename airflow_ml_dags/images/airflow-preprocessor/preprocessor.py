@@ -32,7 +32,7 @@ def preprocess(raw_data_dir, output_dir):
         "trestbps",
         "chol",
         "fbs",
-        "thalach",
+        "thalanch",
         "oldpeak",
         "ca",
     ]
@@ -44,19 +44,19 @@ def preprocess(raw_data_dir, output_dir):
             (
                 "imputer",
                 KNNImputer(),
-                self.config.cathegory_features +
-                self.config.number_features,
+                cathegory_features +
+                number_features,
             ),
-            ("number", StandardScaler(), self.config.number_features),
+            ("number", StandardScaler(), number_features),
             (
                 "cathegory",
                 OneHotEncoder(handle_unknown="ignore"),
-                self.config.cathegory_features,
+                cathegory_features,
             ),
         ]
     )
 
-    df = pd.Dataframe(ct.fit_predict(df), columns=columns)
+    df = pd.DataFrame(ct.fit_transform(df))
     df.to_csv(f"{output_dir}/data.csv", index=False)
 
 

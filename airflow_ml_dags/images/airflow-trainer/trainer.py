@@ -12,7 +12,7 @@ from sklearn.linear_model import LogisticRegression
 def train(data_dir, result_dir):
     os.makedirs(result_dir, exist_ok=True)
     X = pd.read_csv(f"{data_dir}/X_train.csv")
-    Y = pd.read_csv(f"{data_dir}/y_train.csv")
+    y = pd.read_csv(f"{data_dir}/y_train.csv")
 
     model = LogisticRegression()
 
