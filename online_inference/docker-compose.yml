@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+    mlapp:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        environment:
+          - CONFIG_PATH=/home/config/config.json
+        ports:
+          - 14565:14565
