@@ -1,0 +1,4 @@
+MYSQL_PASSWORD=airflow
+MYSQL_ROOT_PASSWORD=airflow
+MYSQL_DATABASE=airflow
+MYSQL_USER=airflow

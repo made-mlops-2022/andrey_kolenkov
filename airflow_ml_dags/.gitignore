@@ -1,0 +1,7 @@
+data/*
+data/.gitempty
+!.mariadb_environment
+!.airflow_environment
+logs
+my-airflowtaskru.pp
+my-airflowtaskru.te
